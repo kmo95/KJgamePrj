@@ -1,4 +1,4 @@
-const $main = document.getElementById('main');
+const $box = document.getElementById("box");
 
 window.addEventListener("keydown", function (event) {
   if (event.defaultPrevented) {
@@ -8,26 +8,19 @@ window.addEventListener("keydown", function (event) {
   switch (event.key) {
   case "Down":
   case "ArrowDown":
-    $main.textContent = 'down';
+    $box.style.backgroundColor = "red";
     break;
   case "Up": 
   case "ArrowUp":
-    $main.textContent = 'up';
+    $box.style.backgroundColor = "blue";
     break;
   case "Left": 
   case "ArrowLeft":
-    $main.textContent = 'left';
+    $box.style.backgroundColor = "green";
     break;
   case "Right": 
   case "ArrowRight":
-    $main.textContent = 'right';
-    break;
-  case "Enter":
-    $main.textContent = 'enter';
-    break;
-  case "Esc": 
-  case "Escape":
-    $main.textContent = 'esc';
+    $box.style.backgroundColor = "yellow";
     break;
   default:
     return; 
