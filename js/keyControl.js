@@ -1,66 +1,61 @@
 const $box = document.getElementById("box");
-const offset = { x: -250, y: -250 };
-$box.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0)`;
+const offset = { x: -25, y: -25 };
+// $box.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0)`;
 
-let lKeyDownPressed = false;
-let rKeyDownPressed = false;
-let uKeyDownPressed = false;
-let dKeyDownPressed = false;
+let leftKeyDownPressed = false;
+let rightKeyDownPressed = false;
+let upKeyDownPressed = false;
+let downKeyDownPressed = false;
 
-function movetest(){
-    $box.style.transform = `translate3d(${offset.x = offset.x + 50}px, ${offset.y}px, 0)`;
-}
+// function movetest(){
+//     $box.style.transform = `translate3d(${offset.x = offset.x + 50}px, ${offset.y}px, 0)`;
+// }
 
-$(document).keydown(function(e){
+window.addEventListener("keydown", function(e){
    if(e.key == 37 || e.key == "ArrowRight") {
-       rKeyDownPressed = true;  
+       rightKeyDownPressed = true;  
    } else if (e.key == 39 || e.key == "ArrowLeft") {
-       lKeyDownPressed = true;  
+       leftKeyDownPressed = true;  
    } else if (e.key == 38 || e.key == "ArrowDown") {
-       uKeyDownPressed = true;  
+       upKeyDownPressed = true;  
    } else if (e.key == 40 || e.key == "ArrowUp") {
-       dKeyDownPressed = true;  
+       downKeyDownPressed = true;  
    }
 });
 
-$(document).keyup(function(e){
+window.addEventListener("keyup", function(e){
    if(e.key == 37 || e.key == "ArrowRight") {
-       rKeyDownPressed = false;  
+       rightKeyDownPressed = false;  
    } else if (e.key == 39 || e.key == "ArrowLeft") {
-       lKeyDownPressed = false;  
+       leftKeyDownPressed = false;  
    } else if (e.key == 38 || e.key == "ArrowDown") {
-       uKeyDownPressed = false;  
+       upKeyDownPressed = false;  
    } else if (e.key == 40 || e.key == "ArrowUp") {
-       dKeyDownPressed = false;  
+       downKeyDownPressed = false;  
    }
 });
 
-function test(){
-    $('#textbox').text(lKeyDownPressed + "/" + rKeyDownPressed + "/" + uKeyDownPressed + "/" + dKeyDownPressed);
-}
-
-setInterval(move, 10);
+// function test(){
+//     $('#textbox').text(lKeyDownPressed + "/" + rKeyDownPressed + "/" + uKeyDownPressed + "/" + dKeyDownPressed);
+// }
 
 function move() {
-  if (dKeyDownPressed == true) {
-    //$box.style.backgroundColor = "red";
+  if (downKeyDownPressed == true) {
     $box.style.transform 
       = `translate3d(${offset.x}px, ${offset.y = offset.y - 5}px, 0)`;
   } 
-  if (uKeyDownPressed == true) {
-    //$box.style.backgroundColor = "blue";
+  if (upKeyDownPressed == true) {
     $box.style.transform 
       = `translate3d(${offset.x}px, ${offset.y = offset.y + 5}px, 0)`;
   } 
-  if (lKeyDownPressed == true) {
-    //$box.style.backgroundColor = "green";
+  if (leftKeyDownPressed == true) {
     $box.style.transform 
       = `translate3d(${offset.x = offset.x - 5}px, ${offset.y}px, 0)`;
   } 
-  if (rKeyDownPressed == true) {
-    //$box.style.backgroundColor = "yellow";
+  if (rightKeyDownPressed == true) {
     $box.style.transform 
       = `translate3d(${offset.x = offset.x + 5}px, ${offset.y}px, 0)`;
   }
 }
 
+setInterval(move, 10);
