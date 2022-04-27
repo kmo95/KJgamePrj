@@ -21,6 +21,7 @@ R&R
 
 ------------------------------------------------------------------------
 
+```
 let unit = {  
   name: NAME,  
   type: TYPE, // map, player, bullet, monster, item  
@@ -31,3 +32,4 @@ let unit = {
     speed: 0
   }  
 };  
+```
