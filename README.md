@@ -21,13 +21,15 @@ R&R
 
 ------------------------------------------------------------------------
 
-let unit = {
-  name: NAME ,
-  type: TYPE , // map, player, bullet, monster, item
-  pos: [0,0] , // player 0,0 defatult
-  status: {
-    hp: 0,
+```
+let unit = {  
+  name: NAME,  
+  type: TYPE, // map, player, bullet, monster, item  
+  pos: [0, 0], // player 0,0 defatult  
+  status: {  
+    hp: 0,  
     damage: 0,
-    
-  } 
-};
+    speed: 0
+  }  
+};  
+```
