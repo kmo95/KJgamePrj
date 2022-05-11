@@ -35,5 +35,10 @@ let unit = {
 ```
 ---
 canvas로 교체  
-box와 ball이 한번 충돌해도 여러번 충돌로 인식  
-ball 여러 개 생성불가  
+~~box와 ball이 한번 충돌해도 여러번 충돌로 인식~~  
+~~ball 여러 개 생성불가~~  
+
+---
+ball이 벽에 끼는 현상  
+reload가 이상함
+
