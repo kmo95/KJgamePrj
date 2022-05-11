@@ -1,8 +1,8 @@
 const canvas = document.getElementById("field");
 const ctx = canvas.getContext("2d");
 const ballRadius = 10;
-let x = canvas.width / (2 + Math.random() * 8);
-let y = canvas.height - (30 + Math.random() * 10);
+let bx = canvas.width * Math.random();
+let by = canvas.height * Math.random();
 let dx = 2;
 let dy = -2;
 const boxHeight = 25;
@@ -13,8 +13,16 @@ let rightPressed = false;
 let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
-let createPressed = false;
+// let createPressed = false;
 let collisionNumber = 0;
+
+
+let ballCount = 10;
+let balls = [];
+
+for (let i = 0; i < ballCount; i++) {
+    balls[i] = { x: 0, y: 0, status: 1 };
+}
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -32,9 +40,9 @@ function keyDownHandler(e) {
     else if (e.key == 40 || e.key == "ArrowUp") {
         downPressed = true;  
     }
-    else if (e.keyCode == 13 || e.key == "Enter") { // 공 생성키
-        createPressed = true;
-    }
+    // else if (e.keyCode == 13 || e.key == "Enter") { // 공 생성키
+    //     createPressed = true;
+    // }
 }
 
 function keyUpHandler(e) {
@@ -53,12 +61,16 @@ function keyUpHandler(e) {
 }
 
 function drawBall() {
-    if (createPressed) {
-        ctx.beginPath();
-        ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF0000";
-        ctx.fill();
-        ctx.closePath();
+    for (let i = 0; i < ballCount; i++) {
+        if (balls[i].status === 1) {
+            balls[i].x = bx;
+            balls[i].y = by;
+            ctx.beginPath();
+            ctx.arc(bx, by, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "#FF0000";
+            ctx.fill();
+            ctx.closePath();
+        }
     }
 }
 
@@ -70,6 +82,19 @@ function drawBox() {
     ctx.closePath();
 }
 
+function collisionDetection() {
+    for (let i = 0; i < ballCount; i++) {
+        let b = balls[i];
+        if (b.status === 1) {
+            if (b.x > boxX && b.x < boxX + boxWidth && b.y > boxY && b.y < boxY + boxHeight) {
+                console.log("충돌");
+                collisionNumber++;
+                b.status = 0;
+            }
+        }
+    }
+}
+
 function drawCollisionNumber() {
     ctx.font = "16px";
     ctx.fillStyle = "#000000";
@@ -79,21 +104,17 @@ function drawCollisionNumber() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBox();
+    drawBall();
     drawCollisionNumber();
+    collisionDetection();
     
     // 좌우로 튕기기
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    if (bx + dx > canvas.width - ballRadius || bx + dx < ballRadius) {
         dx = -dx;
     }
     // 위 아래 방향으로 튕기기
-    if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+    if (by + dy > canvas.height - ballRadius || by + dy < ballRadius) {
         dy = -dy;
-    }
-
-    // 박스와 공 충돌
-    if (x > boxX && x < boxX + boxWidth && y > boxY && y < boxY + boxHeight) {
-        console.log("충돌");
-        collisionNumber++;
     }
 
     // 박스 움직이기
@@ -111,9 +132,8 @@ function draw() {
         boxY -= 5;
     }
     
-    x += dx;
-    y += dy;
+    bx += dx;
+    by += dy;
 }
 
 setInterval(draw, 10);
-setInterval(drawBall, 10);
