@@ -14,8 +14,8 @@ let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
 let lifePoint = 3;
-
-let ballCount = 5;
+let boxSpeed = 4;
+let ballCount = 4;
 let balls = [];
 
 for (let i = 0; i < ballCount; i++) {
@@ -121,28 +121,30 @@ function draw() {
     
     // 박스 움직이기
     if (rightPressed && boxX < canvas.width - boxWidth) {
-        boxX += 5;
+        boxX += boxSpeed;
     }
     else if (leftPressed && boxX > 0) {
-        boxX -= 5;
+        boxX -= boxSpeed;
     }
 
     if (upPressed && boxY < canvas.height - boxHeight) {
-        boxY += 5;
+        boxY += boxSpeed;
     }
     else if (downPressed && boxY > 0) {
-        boxY -= 5;
+        boxY -= boxSpeed;
     }
 
     if (lifePoint === 0) {
         let result = confirm("Game Over!\nRestart?");
         if (result) {
-            setTimeout(() => document.location.reload(), 10);
+            document.location.reload();
+            clearInterval(interval);
         }
         else {
-            setTimeout(() => document.location.href = "../end.html", 10);
+            document.location.href = "../end.html";
+            clearInterval(interval);
         }
     }
 }
 
-setInterval(draw, 10);
+let interval = setInterval(draw, 10);
