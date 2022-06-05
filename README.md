@@ -40,5 +40,5 @@ canvas로 교체
 
 ---
 ball이 벽에 끼는 현상  
-reload가 이상함
+~~reload가 이상함~~
 
